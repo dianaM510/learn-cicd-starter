@@ -19,4 +19,4 @@ jobs:
           go-version: "1.26.0"
 
       - name: Check version 
-        run: go test /home/diana/Documents/boot.dev/learn-cicd-starter/internal/auth/
+        run: go test ./...
