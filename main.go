@@ -88,18 +88,18 @@ func main() {
 
 	v1Router.Get("/healthz", handlerReadiness)
 	router.Mount("/v1", v1Router)
-	
+
 	portNum, err := strconv.Atoi(port)
 	if err != nil {
-	    log.Fatalf("Invalid port: %s", err)
+		log.Fatalf("Invalid port: %s", err)
 	}
 
 	srv := &http.Server{
-	    Addr:              ":" + port,
-	    Handler:           router,
-	    ReadHeaderTimeout: 10 * time.Second,
+		Addr:              ":" + port,
+		Handler:           router,
+		ReadHeaderTimeout: 10 * time.Second,
 	}
 
 	log.Printf("Serving on port: %d\n", portNum)
-	log.Fatal(srv.ListenAndServe())	
+	log.Fatal(srv.ListenAndServe())
 }
