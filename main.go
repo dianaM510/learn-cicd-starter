@@ -76,7 +76,7 @@ func main() {
 		}
 	})
 
-//	v1Router := chi.NewRouter()
+	v1Router := chi.NewRouter()
 
 	if apiCfg.DB != nil {
 		v1Router.Post("/users", apiCfg.handlerUsersCreate)
@@ -85,7 +85,7 @@ func main() {
 		v1Router.Post("/notes", apiCfg.middlewareAuth(apiCfg.handlerNotesCreate))
 	}
 
-//	v1Router.Get("/healthz", handlerReadiness)
+	v1Router.Get("/healthz", handlerReadiness)
 
 	router.Mount("/v1", v1Router)
 	srv := &http.Server{
