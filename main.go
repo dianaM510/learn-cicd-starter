@@ -2,12 +2,13 @@ package main
 
 import (
 	"database/sql"
+	"time"
 	"embed"
 	"io"
 	"log"
 	"net/http"
 	"os"
-
+	"strconv"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
@@ -91,8 +92,12 @@ func main() {
 	srv := &http.Server{
 		Addr:    ":" + port,
 		Handler: router,
+		ReadHeaderTimeout: 10 * time.Second,
 	}
-
+	
+	if _, err := strconv.Atoi(port); err != nil{
+		log.Fatalf("Invalid port: %s", err)
+	}
 	log.Printf("Serving on port: %s\n", port)
 	log.Fatal(srv.ListenAndServe())
 }
